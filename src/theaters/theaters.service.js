@@ -15,7 +15,7 @@ function list() {
 			"theaters.theater_id",
 			"movies_theaters.theater_id"
 		)
-		.join("movies", "movies_theaters.movie_id", "movies.movies_id")
+		.join("movies", "movies_theaters.movie_id", "movies.movie_id")
 		.select("*")
 		.then(addMovies);
 }

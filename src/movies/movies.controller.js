@@ -1,14 +1,13 @@
 const service = require("./movies.service");
-const asyncErrorBoundry = require("../errors/asyncErrorBoundary");
-const { as } = require("../db/connection");
+const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
 async function movieExists(req, res, next) {
-	const movie = service.read(req.params.movieId);
+	const movie = await service.read(req.params.movieId);
 	if (movie) {
 		res.locals.movie = movie;
 		return next();
 	}
-	next({ status: 404, message: "Movie cannot be found." });
+	next({ status: 404, message: `Movie cannot be found.` });
 }
 
 async function list(req, res) {
@@ -23,7 +22,7 @@ function read(req, res) {
 }
 
 module.exports = {
-	read: [asyncErrorBoundry(movieExists), read],
-	list: asyncErrorBoundry(list),
+	read: [asyncErrorBoundary(movieExists), read],
+	list: asyncErrorBoundary(list),
 	movieExists,
 };

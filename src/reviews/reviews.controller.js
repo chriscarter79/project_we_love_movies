@@ -16,9 +16,7 @@ const VALID_PROPERTIES = [
 ];
 
 function hasOnlyValidProperties(req, res, next) {
-	const {
-		data: {},
-	} = req.body;
+	const { data = {} } = req.body;
 	const invalidFields = Object.keys(data).filter(
 		(field) => !VALID_PROPERTIES.includes(field)
 	);

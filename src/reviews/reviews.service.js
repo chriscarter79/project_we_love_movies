@@ -10,7 +10,7 @@ const addCritic = mapProperties({
 function list(movieId) {
 	return knex("reviews")
 		.join("critics", "reviews.critic_id", "critics.critic_id")
-		.select("reviews.*", "critics")
+		.select("reviews.*", "critics.*")
 		.where({ "reviews.movie_id": movieId })
 		.then((data) => data.map((i) => addCritic(i)));
 }

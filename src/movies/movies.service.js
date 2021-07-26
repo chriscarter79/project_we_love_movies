@@ -5,7 +5,7 @@ function list() {
 }
 
 function listShowingTrue() {
-	return knex("movie_theaters")
+	return knex("movies_theaters")
 		.join("movies", "movies_theaters.movie_id", "movies.movie_id")
 		.select("*")
 		.where({ is_showing: true })
